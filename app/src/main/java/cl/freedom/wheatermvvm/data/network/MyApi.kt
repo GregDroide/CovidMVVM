@@ -24,7 +24,7 @@ interface MyApi {
     @GET("reports/total/?rapidapi-key=96afa298cbmsh913f910f914494cp110c39jsn01a32d68445e")
     suspend fun getActualReportCovid(
         @Query("date") date : String? = null
-    ) : Response<CovidResponse>
+    ) : Response<CovidResponse?>
 
 
     companion object

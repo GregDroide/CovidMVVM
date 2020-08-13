@@ -26,9 +26,11 @@ class NetworkConnectionInterceptor(context : Context) : Interceptor {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun isInternetAvailable(): Boolean {
 
-        val connectivityManager =
-            applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        try {
+            val connectivityManager =
+                applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
             if (capabilities != null) {
                 if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                     Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
@@ -41,6 +43,10 @@ class NetworkConnectionInterceptor(context : Context) : Interceptor {
                     return true
                 }
             }
+        }catch (e : Exception)
+        {
+            e.printStackTrace()
+        }
 
         return false
     }

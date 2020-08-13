@@ -66,10 +66,6 @@ class MainActivity : AppCompatActivity(), CovidListener, KodeinAware, View.OnCli
     override fun onClick(v: View?) {
 
         if (v != null) {
-
-            println("Entro "+ v.id + " "+ binding.btnDate.id)
-
-
             if (v.id === binding.btnDate.id) {
 
                 val c = getInstance()
