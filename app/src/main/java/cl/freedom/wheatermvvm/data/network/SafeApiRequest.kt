@@ -11,7 +11,7 @@ abstract class SafeApiRequest {
     suspend fun <T : Any> apiRequest(call : suspend () -> Response<T?>) : T?{
         val response = call.invoke()
 
-        if (response.isSuccessful)
+        if (response.isSuccessful && response.code() == 200)
         {
             return response.body()!!
         }else

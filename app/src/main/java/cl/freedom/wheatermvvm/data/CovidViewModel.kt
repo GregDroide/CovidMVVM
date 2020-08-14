@@ -5,6 +5,7 @@ import cl.freedom.desafiomvvm.util.ApiException
 import cl.freedom.desafiomvvm.util.Coroutines
 import cl.freedom.desafiomvvm.util.NoInternetException
 import cl.freedom.wheatermvvm.data.repository.CovidRepository
+import java.io.IOException
 
 class CovidViewModel(private val covidRepository: CovidRepository) : ViewModel()
 {
@@ -16,7 +17,6 @@ class CovidViewModel(private val covidRepository: CovidRepository) : ViewModel()
 
             try {
                 val response = covidRepository.getData(date)
-                println("Response "+ response)
                 response!!.data?.let {
                     covidListener?.onSuccess(response!!.data!!.date, response!!.data!!.confirmed, response!!.data!!.active)
                     return@main
@@ -27,6 +27,10 @@ class CovidViewModel(private val covidRepository: CovidRepository) : ViewModel()
                 covidListener?.onFailure(e.message!!)
             }
             catch (e: NoInternetException)
+            {
+                covidListener?.onFailure(e.message!!)
+            }
+            catch (e : IOException)
             {
                 covidListener?.onFailure(e.message!!)
             }

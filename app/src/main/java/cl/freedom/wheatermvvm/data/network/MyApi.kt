@@ -5,6 +5,7 @@ import cl.freedom.wheatermvvm.data.response.CovidResponse
 import cl.freedom.wheatermvvm.util.QueryParameterInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -35,9 +36,14 @@ interface MyApi {
     {
         operator fun invoke(networkConnectionInterceptor: NetworkConnectionInterceptor) : MyApi {
 
+            val interceptor =  HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
             val okkHttpClient = OkHttpClient.Builder()
                 .addInterceptor(networkConnectionInterceptor)
+                .addInterceptor(interceptor)
                 .build()
+
 
             return Retrofit.Builder()
                 .client(okkHttpClient)
