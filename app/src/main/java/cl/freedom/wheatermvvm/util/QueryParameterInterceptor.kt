@@ -1,6 +1,5 @@
 package cl.freedom.wheatermvvm.util
 
-import cl.freedom.desafiomvvm.data.network.API_KEY
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -13,7 +12,7 @@ class QueryParameterInterceptor : Interceptor {
         var url = chain.request()
             .url()
             .newBuilder()
-            .addQueryParameter("key", API_KEY)
+            .addQueryParameter("key", "")
             .build()
 
         println("URL "+ url)

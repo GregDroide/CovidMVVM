@@ -13,11 +13,9 @@ import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val API_KEY = "5dc9308387296b977523f9c8a931577d"
 
 interface MyApi {
 
-//http://api.weatherstack.com/current?access_key=5dc9308387296b977523f9c8a931577d&query=New%20York
 //https://covid-19-statistics.p.rapidapi.com/reports/total/?rapidapi-key=96afa298cbmsh913f910f914494cp110c39jsn01a32d68445e
 
 
@@ -25,6 +23,12 @@ interface MyApi {
     suspend fun getActualReportCovid(
         @Query("date") date : String? = null
     ) : Response<CovidResponse?>
+
+    @GET("reports/total/?rapidapi-key=96afa298cbmsh913f910f914494cp110c39jsn01a32d68445e")
+    suspend fun getCovidList(
+        @Query("date") date : String? = null
+    ) : Response<CovidResponse?>
+
 
 
     companion object

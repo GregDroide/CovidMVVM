@@ -2,10 +2,8 @@ package cl.freedom.wheatermvvm
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -80,6 +78,11 @@ class MainActivity : AppCompatActivity(), CovidListener, KodeinAware, View.OnCli
                     }, mYear, mMonth, mDay
                 )
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1 * 24 * 60 * 60 * 1000)
+                val calendar = getInstance()
+                calendar.set(2020, 0, 23)
+
+
+                datePickerDialog.getDatePicker().setMinDate(calendar.timeInMillis)
                 datePickerDialog.show()
             }
         }
