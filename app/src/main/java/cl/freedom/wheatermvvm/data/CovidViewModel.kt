@@ -18,7 +18,7 @@ class CovidViewModel(private val covidRepository: CovidRepository) : ViewModel()
             try {
                 val response = covidRepository.getData(date)
                 response!!.data?.let {
-                    covidListener?.onSuccess(response!!.data!!.date, response!!.data!!.confirmed, response!!.data!!.active)
+                    covidListener?.onSuccess(response!!.data!!.date, response!!.data!!.confirmed, response!!.data!!.deaths)
                     return@main
                 }
 
