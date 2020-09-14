@@ -1,59 +1,60 @@
-package cl.freedom.wheatermvvm
+package cl.freedom.wheatermvvm.ui
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import cl.freedom.desafiomvvm.util.toast
+import cl.freedom.wheatermvvm.R
+import cl.freedom.wheatermvvm.application.CovidApplication
 import cl.freedom.wheatermvvm.data.CovidListener
 import cl.freedom.wheatermvvm.data.CovidViewModel
 import cl.freedom.wheatermvvm.data.CovidViewModelFactory
 import cl.freedom.wheatermvvm.databinding.ActivityMainBinding
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
+import dagger.android.support.DaggerAppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), CovidListener, KodeinAware, View.OnClickListener {
+private const val TAG = "MainActivity"
 
-    override val kodein by kodein()
+class MainActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListener {
 
-    private val factory : CovidViewModelFactory by instance()
+    //private val factory : CovidViewModelFactory by instance()
     private lateinit var binding : ActivityMainBinding
     private lateinit var viewModel: CovidViewModel
     private var mYear = 0
     private  var mMonth:Int = 0
     private  var mDay:Int = 0
-    private  var mHour:Int = 0
-    private  var mMinute:Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this, factory).get(CovidViewModel::class.java)
-
+        //(application as CovidApplication).covidComponent.inject(this)
+        //viewModel = ViewModelProvider(this, factory).get(CovidViewModel::class.java)
+        
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        viewModel.covidListener = this
+        //viewModel.covidListener = this
         binding.btnDate.setOnClickListener(this)
-        firstData()
+        //firstData()
     }
 
     override fun onStarted() {
         toast("Comenzó")
     }
 
-    override fun onSuccess(date: String, confirmed: Int, quantity: Int) {
+    override fun onSuccess(date: String, confirmed: Int, deaths: Int) {
         val dateFormated = dateFormat(date)
         binding.date.setText(dateFormated)
         binding.confirmed.setText(confirmed.toString())
-        binding.quantity.setText(quantity.toString())
+        binding.quantity.setText(deaths.toString())
     }
 
     override fun onFailure(message: String) {
@@ -80,7 +81,6 @@ class MainActivity : AppCompatActivity(), CovidListener, KodeinAware, View.OnCli
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1 * 24 * 60 * 60 * 1000)
                 val calendar = getInstance()
                 calendar.set(2020, 0, 23)
-
 
                 datePickerDialog.getDatePicker().setMinDate(calendar.timeInMillis)
                 datePickerDialog.show()
@@ -109,7 +109,6 @@ class MainActivity : AppCompatActivity(), CovidListener, KodeinAware, View.OnCli
         val day = dayDate.format(date)
         val year = yearDate.format(date)
 
-
         return day + " de "+ monthName + " del "+ year
     }
 
@@ -132,7 +131,6 @@ class MainActivity : AppCompatActivity(), CovidListener, KodeinAware, View.OnCli
         } catch (e  : Exception) {
         e.printStackTrace();
     }
-
         return ""
     }
 

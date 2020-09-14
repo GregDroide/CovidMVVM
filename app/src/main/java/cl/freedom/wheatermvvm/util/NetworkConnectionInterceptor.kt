@@ -18,8 +18,6 @@ class NetworkConnectionInterceptor(context : Context) : Interceptor {
         if(!isInternetAvailable())
             throw NoInternetException("No hay internet")
 
-        println("URL "+ chain.request().url())
-
         return chain.proceed(chain.request())
     }
 

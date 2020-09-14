@@ -25,14 +25,8 @@ interface MyApi {
         @Query("date") date : String? = null
     ) : Response<CovidResponse?>
 
-    @GET("reports/total/?rapidapi-key=96afa298cbmsh913f910f914494cp110c39jsn01a32d68445e")
-    suspend fun getCovidList(
-        @Query("date") date : String? = null
-    ) : Response<CovidResponse?>
 
-
-
-    companion object
+/*    companion object
     {
         operator fun invoke(networkConnectionInterceptor: NetworkConnectionInterceptor) : MyApi {
 
@@ -52,5 +46,5 @@ interface MyApi {
                 .build()
                 .create(MyApi::class.java)
         }
-    }
+    }*/
 }
