@@ -1,31 +1,31 @@
-package cl.freedom.wheatermvvm.ui
+package cl.freedom.wheatermvvm.ui.dashboard
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import cl.freedom.desafiomvvm.util.toast
 import cl.freedom.wheatermvvm.R
-import cl.freedom.wheatermvvm.application.CovidApplication
 import cl.freedom.wheatermvvm.data.CovidListener
 import cl.freedom.wheatermvvm.data.CovidViewModel
-import cl.freedom.wheatermvvm.data.CovidViewModelFactory
 import cl.freedom.wheatermvvm.databinding.ActivityMainBinding
+import cl.freedom.wheatermvvm.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
 import javax.inject.Inject
 
-private const val TAG = "MainActivity"
+private const val TAG = "Dashboard"
 
-class MainActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListener {
+class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListener {
 
     //private val factory : CovidViewModelFactory by instance()
+    @Inject
+    lateinit var providerFactory: ViewModelProviderFactory
+
     private lateinit var binding : ActivityMainBinding
     private lateinit var viewModel: CovidViewModel
     private var mYear = 0
@@ -38,7 +38,7 @@ class MainActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListe
         setContentView(R.layout.activity_main)
 
         //(application as CovidApplication).covidComponent.inject(this)
-        //viewModel = ViewModelProvider(this, factory).get(CovidViewModel::class.java)
+        viewModel = ViewModelProvider(this, providerFactory).get(CovidViewModel::class.java)
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         //viewModel.covidListener = this
@@ -75,7 +75,7 @@ class MainActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListe
                     this,
                     OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                         val dateFormat = dateFormat(dayOfMonth, monthOfYear + 1, year)
-                        viewModel.getData(dateFormat)
+                        //viewModel.getData(dateFormat)
                     }, mYear, mMonth, mDay
                 )
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1 * 24 * 60 * 60 * 1000)
@@ -94,7 +94,7 @@ class MainActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListe
         val yesterday = Date(today.time - 1000 * 60 * 60 * 24)
         val yesterdayFormated = SimpleDateFormat("yyyy-MM-dd").format(yesterday)
 
-        viewModel.getData(yesterdayFormated)
+        //viewModel.getData(yesterdayFormated)
     }
 
     private fun dateFormat(date : String) : String

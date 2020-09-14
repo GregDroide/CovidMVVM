@@ -36,9 +36,9 @@ class AppModule(private val app: Application) {
         }
 
         @Provides
-        fun provideAppDrawableSplash(application : Application) : Drawable?
+        fun provideAppDrawableSplash(application : Application) : Drawable
         {
-            return ContextCompat.getDrawable(application, R.drawable.splash)
+            return ContextCompat.getDrawable(application, R.drawable.splash)!!
         }
     }
 }

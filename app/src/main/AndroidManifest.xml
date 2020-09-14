@@ -16,11 +16,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".ui.dashboard.DashboardActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".ui.SplashActivity"
+        <activity android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
             android:noHistory="true"

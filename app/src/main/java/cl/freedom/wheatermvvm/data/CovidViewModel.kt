@@ -1,17 +1,27 @@
 package cl.freedom.wheatermvvm.data
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import cl.freedom.desafiomvvm.util.ApiException
 import cl.freedom.desafiomvvm.util.Coroutines
 import cl.freedom.desafiomvvm.util.NoInternetException
 import cl.freedom.wheatermvvm.data.repository.CovidRepository
 import java.io.IOException
+import javax.inject.Inject
 
-class CovidViewModel(private val covidRepository: CovidRepository) : ViewModel()
+
+private const val TAG = "CovidViewModel"
+
+class CovidViewModel @Inject constructor() : ViewModel()
 {
+
+    init {
+        Log.d(TAG, "Inicio viewmodel")
+    }
+
     var covidListener: CovidListener? = null
 
-    fun getData(date : String? = null)
+  /*  fun getData(date : String? = null)
     {
         Coroutines.main {
 
@@ -36,5 +46,5 @@ class CovidViewModel(private val covidRepository: CovidRepository) : ViewModel()
             }
 
         }
-    }
+    }*/
 }
