@@ -3,6 +3,7 @@ import cl.freedom.desafiomvvm.data.network.MyApi
 import cl.freedom.wheatermvvm.data.network.SafeApiRequest
 import cl.freedom.wheatermvvm.data.response.CovidResponse
 import retrofit2.Response
+import javax.inject.Inject
 
 class CovidRepository(val api : MyApi) : SafeApiRequest()
 {

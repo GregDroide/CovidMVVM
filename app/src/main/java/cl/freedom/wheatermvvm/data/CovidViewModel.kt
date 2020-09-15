@@ -2,6 +2,7 @@ package cl.freedom.wheatermvvm.data
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import cl.freedom.desafiomvvm.data.network.MyApi
 import cl.freedom.desafiomvvm.util.ApiException
 import cl.freedom.desafiomvvm.util.Coroutines
 import cl.freedom.desafiomvvm.util.NoInternetException
@@ -12,11 +13,19 @@ import javax.inject.Inject
 
 private const val TAG = "CovidViewModel"
 
-class CovidViewModel @Inject constructor() : ViewModel()
+class CovidViewModel @Inject constructor(api : MyApi) : ViewModel()
 {
-
     init {
         Log.d(TAG, "Inicio viewmodel")
+
+        if(api == null)
+        {
+            Log.d(TAG, "CovidViewModel: auth api is NULL ")
+        }
+        else
+        {
+            Log.d(TAG, "CovidViewModel: auth api is NOT NULL ")
+        }
     }
 
     var covidListener: CovidListener? = null

@@ -11,7 +11,8 @@ import dagger.android.support.AndroidSupportInjectionModule
     AndroidSupportInjectionModule::class,
     ActivityBuilderModule::class,
     AppModule::class,
-    ViewModelFactoryModule::class
+    ViewModelFactoryModule::class,
+    NetworkModule::class
 ])
 interface AppComponent : AndroidInjector<CovidApplication> {
 
