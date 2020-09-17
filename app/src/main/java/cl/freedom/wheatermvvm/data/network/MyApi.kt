@@ -3,6 +3,7 @@ package cl.freedom.desafiomvvm.data.network
 import cl.freedom.desafiomvvm.util.NetworkConnectionInterceptor
 import cl.freedom.wheatermvvm.data.response.CovidResponse
 import cl.freedom.wheatermvvm.util.QueryParameterInterceptor
+import io.reactivex.Flowable
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor

@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
@@ -40,6 +41,7 @@ class NetworkModule {
         fun provideRetrofit(client: OkHttpClient, converterFactory: GsonConverterFactory, @Named(NAME_BASE_URL) baseUrl: String): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(converterFactory)
                 .client(client)
                 .build()
@@ -50,11 +52,10 @@ class NetworkModule {
             return retrofit.create(MyApi::class.java)
         }
 
-/*        @Provides
-        @Singleton
+        @Provides
         fun provideRepository(api : MyApi) : CovidRepository{
             return CovidRepository(api)
-        }*/
+        }
     }
-    }
+}
 

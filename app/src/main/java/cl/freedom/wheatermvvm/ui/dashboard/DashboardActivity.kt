@@ -41,9 +41,9 @@ class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClick
         viewModel = ViewModelProvider(this, providerFactory).get(CovidViewModel::class.java)
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        //viewModel.covidListener = this
+        viewModel.covidListener = this
         binding.btnDate.setOnClickListener(this)
-        //firstData()
+        firstData()
     }
 
     override fun onStarted() {
@@ -94,7 +94,7 @@ class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClick
         val yesterday = Date(today.time - 1000 * 60 * 60 * 24)
         val yesterdayFormated = SimpleDateFormat("yyyy-MM-dd").format(yesterday)
 
-        //viewModel.getData(yesterdayFormated)
+        viewModel.getData(yesterdayFormated)
     }
 
     private fun dateFormat(date : String) : String
