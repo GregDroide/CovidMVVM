@@ -8,8 +8,9 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class NetworkConnectionInterceptor(context : Context) : Interceptor {
+class NetworkConnectionInterceptor @Inject constructor(context : Context) : Interceptor {
 
     private val applicationContext = context.applicationContext
 

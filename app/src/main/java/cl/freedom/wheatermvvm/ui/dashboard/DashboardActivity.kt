@@ -10,9 +10,14 @@ import cl.freedom.desafiomvvm.util.toast
 import cl.freedom.wheatermvvm.R
 import cl.freedom.wheatermvvm.data.CovidListener
 import cl.freedom.wheatermvvm.data.CovidViewModel
+import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSource
+import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSourceImpl
 import cl.freedom.wheatermvvm.databinding.ActivityMainBinding
 import cl.freedom.wheatermvvm.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
@@ -22,12 +27,14 @@ private const val TAG = "Dashboard"
 
 class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListener {
 
-    //private val factory : CovidViewModelFactory by instance()
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory
 
+    @Inject
+    lateinit var covidNetworkDataSource: CovidNetworkDataSourceImpl
+
     private lateinit var binding : ActivityMainBinding
-    private lateinit var viewModel: CovidViewModel
+    //private lateinit var viewModel: CovidViewModel
     private var mYear = 0
     private  var mMonth:Int = 0
     private  var mDay:Int = 0
@@ -38,10 +45,10 @@ class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClick
         setContentView(R.layout.activity_main)
 
         //(application as CovidApplication).covidComponent.inject(this)
-        viewModel = ViewModelProvider(this, providerFactory).get(CovidViewModel::class.java)
+        //viewModel = ViewModelProvider(this, providerFactory).get(CovidViewModel::class.java)
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        viewModel.covidListener = this
+        //viewModel.covidListener = this
         binding.btnDate.setOnClickListener(this)
         firstData()
     }
@@ -94,7 +101,19 @@ class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClick
         val yesterday = Date(today.time - 1000 * 60 * 60 * 24)
         val yesterdayFormated = SimpleDateFormat("yyyy-MM-dd").format(yesterday)
 
-        viewModel.getData(yesterdayFormated)
+
+/*        covidNetworkDataSource.downloadedCurrentCovid.observe(this, androidx.lifecycle.Observer {
+            println("Data covid: $it")
+        })
+
+
+
+        GlobalScope.launch(Dispatchers.Main) {
+           covidNetworkDataSource.fetchCurrentCovid("2020-04-07")
+        }*/
+
+
+        //viewModel.getData(yesterdayFormated)
     }
 
     private fun dateFormat(date : String) : String

@@ -29,7 +29,7 @@ class SplashActivity : DaggerAppCompatActivity(){
         {
             override fun run() {
                 try {
-                    Thread.sleep(7000)
+                    Thread.sleep(1000)
                     val intent = Intent(baseContext, DashboardActivity::class.java)
                     startActivity(intent)
                 }

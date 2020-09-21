@@ -1,9 +1,14 @@
-package cl.freedom.wheatermvvm.data.response
+package cl.freedom.wheatermvvm.data.entity
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-data class Data(
+const val CURRENT_COVID_ID = 0
+
+@Entity(tableName = "current_covid")
+data class CurrentCovidEntry(
     @SerializedName("active")
     val active: Int,
     @SerializedName("active_diff")
@@ -26,4 +31,7 @@ data class Data(
     val recovered: Int,
     @SerializedName("recovered_diff")
     val recoveredDiff: Int
-)
+){
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = CURRENT_COVID_ID
+}

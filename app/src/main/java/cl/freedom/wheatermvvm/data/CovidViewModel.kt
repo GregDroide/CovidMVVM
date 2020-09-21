@@ -18,12 +18,12 @@ import javax.inject.Inject
 
 private const val TAG = "CovidViewModel"
 
-class CovidViewModel @Inject constructor(val covidRepository: CovidRepository) : ViewModel()
+class CovidViewModel @Inject constructor() : ViewModel()
 {
 
     var covidListener: CovidListener? = null
 
-    fun getData(date : String? = null)
+/*    fun getData(date : String? = null)
     {
         Coroutines.main {
 
@@ -31,7 +31,7 @@ class CovidViewModel @Inject constructor(val covidRepository: CovidRepository) :
                 val response = covidRepository.getData(date)
                 response!!.data?.let {
                     covidListener?.onSuccess(response!!.data!!.date, response!!.data!!.confirmed, response!!.data!!.deaths)
-                    return@main
+                    return@let
                 }
 
             }catch (e : ApiException)
@@ -48,5 +48,5 @@ class CovidViewModel @Inject constructor(val covidRepository: CovidRepository) :
             }
 
         }
-    }
+    }*/
 }

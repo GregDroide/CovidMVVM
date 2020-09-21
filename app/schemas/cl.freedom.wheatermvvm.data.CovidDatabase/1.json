@@ -1,0 +1,100 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1e3f42bc38e4ce576146e173f6d54d7d",
+    "entities": [
+      {
+        "tableName": "current_covid",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `active` INTEGER NOT NULL, `activeDiff` INTEGER NOT NULL, `confirmed` INTEGER NOT NULL, `confirmedDiff` INTEGER NOT NULL, `date` TEXT NOT NULL, `deaths` INTEGER NOT NULL, `deathsDiff` INTEGER NOT NULL, `fatalityRate` REAL NOT NULL, `lastUpdate` TEXT NOT NULL, `recovered` INTEGER NOT NULL, `recoveredDiff` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "active",
+            "columnName": "active",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activeDiff",
+            "columnName": "activeDiff",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "confirmed",
+            "columnName": "confirmed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "confirmedDiff",
+            "columnName": "confirmedDiff",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deaths",
+            "columnName": "deaths",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "deathsDiff",
+            "columnName": "deathsDiff",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fatalityRate",
+            "columnName": "fatalityRate",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdate",
+            "columnName": "lastUpdate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recovered",
+            "columnName": "recovered",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recoveredDiff",
+            "columnName": "recoveredDiff",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1e3f42bc38e4ce576146e173f6d54d7d')"
+    ]
+  }
+}

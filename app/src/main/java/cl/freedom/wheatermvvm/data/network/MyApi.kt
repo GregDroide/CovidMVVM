@@ -4,6 +4,7 @@ import cl.freedom.desafiomvvm.util.NetworkConnectionInterceptor
 import cl.freedom.wheatermvvm.data.response.CovidResponse
 import cl.freedom.wheatermvvm.util.QueryParameterInterceptor
 import io.reactivex.Flowable
+import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,10 +22,10 @@ interface MyApi {
 //https://covid-19-statistics.p.rapidapi.com/reports/total/?rapidapi-key=96afa298cbmsh913f910f914494cp110c39jsn01a32d68445e
 
 
-    @GET("reports/total/?rapidapi-key=96afa298cbmsh913f910f914494cp110c39jsn01a32d68445e")
-    suspend fun getActualReportCovid(
+    @GET("reports/total")
+    fun getActualReportCovid(
         @Query("date") date : String? = null
-    ) : Response<CovidResponse?>
+    ) : Deferred<CovidResponse?>
 
 
 /*    companion object

@@ -13,12 +13,12 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val app: Application) {
-/*    @Provides
-    @Singleton
-    fun provideContext(): Context = app*/
+class AppModule(private val application: Application) {
+
+
 
     companion object{
+
 
         @Provides
         fun provideRequestOptions() : RequestOptions

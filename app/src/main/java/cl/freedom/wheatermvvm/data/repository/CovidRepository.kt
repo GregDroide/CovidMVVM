@@ -1,12 +1,59 @@
 package cl.freedom.wheatermvvm.data.repository
+import androidx.lifecycle.LiveData
 import cl.freedom.desafiomvvm.data.network.MyApi
+import cl.freedom.wheatermvvm.data.dao.CurrentCovidDao
+import cl.freedom.wheatermvvm.data.entity.CurrentCovidEntryMapper
 import cl.freedom.wheatermvvm.data.network.SafeApiRequest
+import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSource
 import cl.freedom.wheatermvvm.data.response.CovidResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class CovidRepository(val api : MyApi) : SafeApiRequest()
+class CovidRepository(private val currentCovidDao: CurrentCovidDao,
+                      private val covidNetworkDataSource: CovidNetworkDataSource)
 {
-    suspend fun getData(date : String? = null) : CovidResponse?
-    {
-        return apiRequest { api.getActualReportCovid(date) }
+    init {
+        covidNetworkDataSource.downloadedCurrentCovid.observeForever{
+            newCurrentCovid ->
+            persistFetchedCurrentCovid(newCurrentCovid)
+        }
     }
+
+    private suspend fun initCovidData(date : String)
+    {
+        if(isFetchedCurrentNeeded(date))
+        {
+            fetchCurrentCovid(date)
+        }
+    }
+
+    private suspend fun fetchCurrentCovid(date : String)
+    {
+        covidNetworkDataSource.fetchCurrentCovid(date)
+    }
+
+
+    suspend fun getCurrentCovid(date : String) : LiveData<CurrentCovidEntryMapper>
+    {
+        return withContext(Dispatchers.IO){
+            return@withContext currentCovidDao.getCovidData()
+        }
+    }
+
+    private fun persistFetchedCurrentCovid(fetchedCovid: CovidResponse)
+    {
+        GlobalScope.launch(Dispatchers.IO) {
+            currentCovidDao.upsert(fetchedCovid.currentCovidEntry)
+        }
+    }
+
+    private fun isFetchedCurrentNeeded(date : String) : Boolean
+    {
+        //you must check that the date exist in the room database
+        return true
+    }
+
+
 }
