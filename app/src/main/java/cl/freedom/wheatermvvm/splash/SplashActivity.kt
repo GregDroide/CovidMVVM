@@ -1,11 +1,11 @@
-package cl.freedom.wheatermvvm.ui.splash
+package cl.freedom.wheatermvvm.splash
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.ImageView
 import cl.freedom.wheatermvvm.R
-import cl.freedom.wheatermvvm.ui.dashboard.DashboardActivity
+import cl.freedom.wheatermvvm.dashboard.ui.CurrentCovidActivity
 import com.bumptech.glide.RequestManager
 import dagger.android.support.DaggerAppCompatActivity
 import java.lang.Exception
@@ -30,7 +30,7 @@ class SplashActivity : DaggerAppCompatActivity(){
             override fun run() {
                 try {
                     Thread.sleep(1000)
-                    val intent = Intent(baseContext, DashboardActivity::class.java)
+                    val intent = Intent(baseContext, CurrentCovidActivity::class.java)
                     startActivity(intent)
                 }
                 catch (e : Exception)

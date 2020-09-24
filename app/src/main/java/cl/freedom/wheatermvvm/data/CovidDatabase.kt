@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import cl.freedom.wheatermvvm.data.dao.CurrentCovidDao
-import cl.freedom.wheatermvvm.data.entity.CurrentCovidEntry
+import cl.freedom.wheatermvvm.dashboard.data.CurrentCovidDao
+import cl.freedom.wheatermvvm.dashboard.data.CurrentCovidEntry
 
 @Database(
     entities = [CurrentCovidEntry::class],
@@ -18,6 +18,12 @@ abstract class CovidDatabase : RoomDatabase() {
     companion object{
         @Volatile private var instance : CovidDatabase? = null
         private val LOCK = Any()
+
+        fun getInstance(context: Context): CovidDatabase {
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
+            }
+        }
 
         operator fun invoke(context : Context) = instance ?: synchronized(LOCK)
         {

@@ -1,9 +1,7 @@
 package cl.freedom.wheatermvvm.data.repository
 import androidx.lifecycle.LiveData
-import cl.freedom.desafiomvvm.data.network.MyApi
-import cl.freedom.wheatermvvm.data.dao.CurrentCovidDao
-import cl.freedom.wheatermvvm.data.entity.CurrentCovidEntryMapper
-import cl.freedom.wheatermvvm.data.network.SafeApiRequest
+import cl.freedom.wheatermvvm.dashboard.data.CurrentCovidDao
+import cl.freedom.wheatermvvm.dashboard.data.CurrentCovidMapper
 import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSource
 import cl.freedom.wheatermvvm.data.response.CovidResponse
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +33,7 @@ class CovidRepository(private val currentCovidDao: CurrentCovidDao,
     }
 
 
-    suspend fun getCurrentCovid(date : String) : LiveData<CurrentCovidEntryMapper>
+    suspend fun getCurrentCovid(date : String) : LiveData<CurrentCovidMapper>
     {
         return withContext(Dispatchers.IO){
             return@withContext currentCovidDao.getCovidData()

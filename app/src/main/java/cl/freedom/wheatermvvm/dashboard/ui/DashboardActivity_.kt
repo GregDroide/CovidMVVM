@@ -1,23 +1,17 @@
-package cl.freedom.wheatermvvm.ui.dashboard
+package cl.freedom.wheatermvvm.dashboard.ui
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import cl.freedom.desafiomvvm.util.toast
 import cl.freedom.wheatermvvm.R
 import cl.freedom.wheatermvvm.data.CovidListener
-import cl.freedom.wheatermvvm.data.CovidViewModel
-import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSource
 import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSourceImpl
 import cl.freedom.wheatermvvm.databinding.ActivityMainBinding
 import cl.freedom.wheatermvvm.viewmodels.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
@@ -25,7 +19,7 @@ import javax.inject.Inject
 
 private const val TAG = "Dashboard"
 
-class DashboardActivity : DaggerAppCompatActivity(), CovidListener, View.OnClickListener {
+class DashboardActivity_ : DaggerAppCompatActivity(), CovidListener, View.OnClickListener {
 
     @Inject
     lateinit var providerFactory: ViewModelProviderFactory

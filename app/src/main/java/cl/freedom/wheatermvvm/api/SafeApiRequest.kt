@@ -1,7 +1,6 @@
-package cl.freedom.wheatermvvm.data.network
+package cl.freedom.wheatermvvm.api
 
 import cl.freedom.desafiomvvm.util.ApiException
-import cl.freedom.wheatermvvm.data.response.CovidResponse
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response

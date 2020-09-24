@@ -1,4 +1,4 @@
-package cl.freedom.wheatermvvm.data.entity
+package cl.freedom.wheatermvvm.dashboard.data
 
 
 import androidx.room.Entity
