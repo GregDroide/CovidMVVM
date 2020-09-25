@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class CurrentCovidRemoteDataSource @Inject constructor(private val service: CovidService) : BaseDataSource() {
 
-    suspend fun fetchData() = getResult { service.getActualReportCovid("2020-04-07") }
+    suspend fun fetchData(date : String) = getResult { service.getActualReportCovid(date) }
 }

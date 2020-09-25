@@ -11,5 +11,4 @@ class CovidApplication : DaggerApplication() {
         return DaggerAppComponent.builder().application(this).build()
     }
 
-
 }

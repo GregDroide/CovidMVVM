@@ -1,5 +1,6 @@
 package cl.freedom.wheatermvvm.api
 
+import cl.freedom.desafiomvvm.util.NoInternetException
 import cl.freedom.wheatermvvm.data.Result
 import retrofit2.Response
 import timber.log.Timber
@@ -24,7 +25,7 @@ abstract class BaseDataSource {
 
     private fun <T> error(message: String): Result<T> {
         Timber.e(message)
-        return Result.error("Network call has failed for a following reason: $message")
+        return Result.error("No hay internet")
     }
 
 }

@@ -21,6 +21,12 @@ class AppModule(private val application: Application) {
     companion object{
 
         @Provides
+        fun provideContext(application: Application) : Context
+        {
+            return application.applicationContext
+        }
+
+        @Provides
         fun provideRequestOptions() : RequestOptions
         {
             return RequestOptions().

@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
  * [Result.Status.ERROR] - if error has occurred from any source
  * [Result.Status.LOADING]
  */
+
 fun <T, A> resultLiveData(databaseQuery: () -> LiveData<T>,
                           networkCall: suspend () -> Result<A>,
                           saveCallResult: suspend (A) -> Unit): LiveData<Result<T>> =

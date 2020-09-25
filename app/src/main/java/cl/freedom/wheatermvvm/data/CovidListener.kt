@@ -1,7 +1,7 @@
 package cl.freedom.wheatermvvm.data
 
 interface CovidListener {
-    fun onStarted()
-    fun onSuccess(date : String, confirmed : Int, quantity : Int)
+    fun onSuccess(date : String, confirmed : Double, deaths : Double)
     fun onFailure(message : String)
+    fun onLoading()
 }

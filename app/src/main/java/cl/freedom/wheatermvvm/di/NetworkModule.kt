@@ -3,7 +3,6 @@ package cl.freedom.wheatermvvm.di
 import android.app.Application
 import cl.freedom.desafiomvvm.data.network.CovidService
 import cl.freedom.desafiomvvm.util.NetworkConnectionInterceptor
-import cl.freedom.wheatermvvm.data.response.CovidNetworkDataSourceImpl
 import cl.freedom.wheatermvvm.util.Const
 import cl.freedom.wheatermvvm.util.Const.Companion.API_KEY
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
